@@ -10,5 +10,10 @@ int main(){
     std::cout << "a: " << a.getValue() << std::endl;
     std::cout << "b: " << b.getValue() << std::endl;
 
+    if(Hexadecimal::isValidCharacter('a')){
+        std::cout << "true" << std::endl;
+    }
+    
+
     return 0;
 }

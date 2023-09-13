@@ -4,8 +4,10 @@
 #include <string>
 
 class Hexadecimal{
-
 public:
+static const int base;
+static const char validCharacters[];
+static bool isValidCharacter(char character);
 Hexadecimal() : Hexadecimal("0x0"){}
 Hexadecimal(std::string val){
     this->value = val;
@@ -16,9 +18,7 @@ std::string getValue() const{
 }
 
 // Should make this return bool, for whether it was successful or not
-void setValue(std::string val) {
-    this->value = val;
-}
+void setValue(std::string val);
 
 protected:
 std::string value;
