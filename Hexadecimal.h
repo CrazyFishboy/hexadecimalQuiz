@@ -18,7 +18,7 @@ std::string getValue() const{
 }
 
 // Should make this return bool, for whether it was successful or not
-void setValue(std::string val);
+bool setValue(std::string val);
 
 protected:
 std::string value;

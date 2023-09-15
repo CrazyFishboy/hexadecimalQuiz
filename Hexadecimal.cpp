@@ -12,6 +12,19 @@ bool Hexadecimal::isValidCharacter(char character){
     return false;
 }
 
-void Hexadecimal::setValue(std::string val){
-    this->value = val;
+// Need to make it remove preceeding 0x before number if present
+bool Hexadecimal::setValue(std::string val){
+    unsigned index = 0;
+    if(val.size() > 2){
+        if(val[0] == '0' && (val[1] == 'x' || val[1] == 'X')){
+            index = 2;
+        } 
+    }
+    for(; index < val.size(); ++index){
+        if(!isValidCharacter(val[index])){
+            return false;
+        }
+    }
+    value = val;
+    return true;
 }
