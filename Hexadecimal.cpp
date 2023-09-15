@@ -28,3 +28,16 @@ bool Hexadecimal::setValue(std::string val){
     value = val;
     return true;
 }
+
+
+/**
+ * @brief Adds the integer value passed as an argument to the Hexadecimal value.
+ * It is assumed that this value is in base 10
+ * 
+ * @param val, the value to be added to this
+ * @return Hexadecimal*, pointer to the Hexadecimal object
+ */
+Hexadecimal* addDecimal(int val){
+    ;
+
+}

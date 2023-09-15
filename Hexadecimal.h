@@ -19,6 +19,7 @@ std::string getValue() const{
 
 // Should make this return bool, for whether it was successful or not
 bool setValue(std::string val);
+Hexadecimal* addDecimal(int val);
 
 protected:
 std::string value;
