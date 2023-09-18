@@ -30,6 +30,7 @@ Hexadecimal(std::string val){ // This is a work-in-progress. Need to validate th
     }
 }
 Hexadecimal* operator++();
+Hexadecimal* operator++(int); // Need to define assignment operator first
 /* Need to add:
 *copy constructor
 *assignment operator

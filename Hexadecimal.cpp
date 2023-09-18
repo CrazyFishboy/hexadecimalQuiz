@@ -32,6 +32,11 @@ bool Hexadecimal::isValidCharacter(char character){
     return false;
 }
 
+/**
+ * @brief Adds 1 to the current value of the object, then returns a pointer to this object
+ * 
+ * @return Hexadecimal*, a pointer to this object
+ */
 Hexadecimal* Hexadecimal::operator++(){
     for(int i = this->value.size() - 1; i >= 0; --i){
         if(std::tolower(value[i]) != std::tolower(validCharacters[base-1])){
@@ -52,6 +57,7 @@ Hexadecimal* Hexadecimal::operator++(){
     value = validCharacters[1] + value;
     return this;
 }
+
 
 // Need to make it remove preceeding 0x before number if present
 bool Hexadecimal::setValue(std::string val){
