@@ -29,6 +29,7 @@ Hexadecimal(std::string val){ // This is a work-in-progress. Need to validate th
         value = "0";
     }
 }
+Hexadecimal* operator++();
 /* Need to add:
 *copy constructor
 *assignment operator
