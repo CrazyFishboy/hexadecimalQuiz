@@ -65,13 +65,26 @@ Hexadecimal* Hexadecimal::operator++(){
     return this;
 }
 
+/**
+ * @brief Assignment operator overload. Assigns the value of the object on the right
+ * side of the operator to the one on the left (this object)
+ * 
+ * @param right, the object being copied
+ * @return Hexadecimal*, returns a pointer to this object
+ */
 Hexadecimal* Hexadecimal::operator=(Hexadecimal *right){
     this->value = right->value;
     return this;
 }
 
 
-// Need to make it remove preceeding 0x before number if present
+/**
+ * @brief Sets the value of the object to the one provided
+ * 
+ * @param val, the value to set the object's to
+ * @return true, the provided value was valid and the object's value was updated
+ * @return false, the provided value was not valid and the object's value was not updated
+ */
 bool Hexadecimal::setValue(std::string val){
     if(val.size() > 0){
         unsigned index = 0;
