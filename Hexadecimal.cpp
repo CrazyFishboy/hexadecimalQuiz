@@ -58,6 +58,11 @@ Hexadecimal* Hexadecimal::operator++(){
     return this;
 }
 
+Hexadecimal* Hexadecimal::operator=(Hexadecimal *right){
+    this->value = right->value;
+    return this;
+}
+
 
 // Need to make it remove preceeding 0x before number if present
 bool Hexadecimal::setValue(std::string val){
