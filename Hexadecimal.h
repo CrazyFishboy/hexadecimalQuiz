@@ -24,11 +24,7 @@ static const char validCharacters[];
 static bool isValidCharacter(char character);
 
 Hexadecimal() : Hexadecimal("0"){}
-Hexadecimal(std::string val){ // This is a work-in-progress. Need to validate that val is valid
-    if(!setValue(val)){
-        value = "0";
-    }
-}
+Hexadecimal(std::string val);
 Hexadecimal* operator++();
 Hexadecimal* operator++(int); // Need to define assignment operator first
 Hexadecimal* operator=(Hexadecimal *right);

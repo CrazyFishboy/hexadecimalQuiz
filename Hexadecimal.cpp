@@ -32,6 +32,13 @@ bool Hexadecimal::isValidCharacter(char character){
     return false;
 }
 
+
+Hexadecimal::Hexadecimal(std::string val){
+    if(!setValue(val)){
+        value = "0";
+    }
+}
+
 /**
  * @brief Adds 1 to the current value of the object, then returns a pointer to this object
  * 
@@ -68,17 +75,26 @@ Hexadecimal* Hexadecimal::operator=(Hexadecimal *right){
 bool Hexadecimal::setValue(std::string val){
     if(val.size() > 0){
         unsigned index = 0;
+        std::string newVal = "";
         if(val.size() > 2){
             if(val[0] == '0' && (val[1] == 'x' || val[1] == 'X')){
                 index = 2;
             } 
         }
+        bool nonZeroEncounterd = false;
         for(; index < val.size(); ++index){
             if(!isValidCharacter(val[index])){
                 return false;
+            } else {
+                if(!nonZeroEncounterd && val[index] != validCharacters[0]){
+                    nonZeroEncounterd = true;
+                }
+                if(nonZeroEncounterd){
+                    newVal += val[index];
+                }
             }
         }
-        value = val;
+        value = newVal;
         return true;
     }
     return false;
