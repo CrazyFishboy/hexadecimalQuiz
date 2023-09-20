@@ -22,6 +22,7 @@ public:
 static const int base;
 static const char validCharacters[];
 static bool isValidCharacter(char character);
+static bool decimalValueOfCharacter(char character, int &index);
 
 Hexadecimal() : Hexadecimal("0"){}
 Hexadecimal(std::string val);

@@ -3,13 +3,13 @@
 
 
 int main(){
-    Hexadecimal a("0x0000fffff");
-    ++a;
-    std::cout << a.getValue() << std::endl;
-    Hexadecimal b("");
-    Hexadecimal c("000F");
-    a = b = c;
-    std::cout << a.getValue() << std::endl;
+    int x = -1;
+    if(Hexadecimal::decimalValueOfCharacter('f',x)){
+        std::cout << "true" << std::endl;
+    } else {
+        std::cout << "false" << std::endl;
+    }
+    std::cout << x << std::endl;
 
     return 0;
 }

@@ -32,6 +32,16 @@ bool Hexadecimal::isValidCharacter(char character){
     return false;
 }
 
+bool Hexadecimal::decimalValueOfCharacter(char character, int &index){
+    for(int i = 0; i < base; ++i){
+        if(std::tolower(character) == tolower(validCharacters[i])){
+            index = i;
+            return true;
+        }
+    }
+    return false;
+}
+
 
 Hexadecimal::Hexadecimal(std::string val){
     if(!setValue(val)){
@@ -119,7 +129,7 @@ bool Hexadecimal::setValue(std::string val){
  * It is assumed that this value is in base 10
  * 
  * @param val, the value to be added to this
- * @return Hexadecimal*, pointer to the Hexadecimal object
+ * @return Hexadecimal*, pointer to this object
  */
 Hexadecimal* Hexadecimal::addDecimal(int val){
     return this;
