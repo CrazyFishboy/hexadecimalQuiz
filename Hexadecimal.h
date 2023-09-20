@@ -15,6 +15,8 @@
 
 #include <string>
 
+#include <iostream>
+
 class Hexadecimal{
 public:
 // Fundamental information for the number system. Defines the base of the number system, the list of valid characters,
@@ -41,7 +43,12 @@ std::string getValue() const{
     return value;
 }
 
+int getSize() const {
+    return value.size();
+}
+
 bool setValue(std::string val);
+Hexadecimal* addHex(const Hexadecimal &hex);
 Hexadecimal* addDecimal(int val);
 
 protected:

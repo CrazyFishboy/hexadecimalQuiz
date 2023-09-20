@@ -55,7 +55,7 @@ Hexadecimal::Hexadecimal(std::string val){
  * @return Hexadecimal*, a pointer to this object
  */
 Hexadecimal* Hexadecimal::operator++(){
-    for(int i = this->value.size() - 1; i >= 0; --i){
+    for(int i = this->getSize() - 1; i >= 0; --i){
         if(std::tolower(value[i]) != std::tolower(validCharacters[base-1])){
             // If character can have 1 added to it, then
             // find the index of the character in valid characters array, and assign its
@@ -132,5 +132,45 @@ bool Hexadecimal::setValue(std::string val){
  * @return Hexadecimal*, pointer to this object
  */
 Hexadecimal* Hexadecimal::addDecimal(int val){
+    return this;
+}
+
+
+Hexadecimal* Hexadecimal::addHex(const Hexadecimal &hex){
+    int * values = new int [3]; // 0 is remainder from previous, 1 is this object, 2 is hex object
+    values[0] = 0;
+    std::string otherValue = hex.getValue();
+    int thisSize = getSize();
+    int thisSizeGrowth = 0;
+    int otherSize = hex.getSize();
+    for(int i = 1; i <= thisSize+thisSizeGrowth; ++i){
+        int temp = 0;
+        decimalValueOfCharacter(value[thisSize-i-thisSizeGrowth],temp);
+        values[1] = temp;
+
+        if(otherSize - i < 0){
+            values[2] = 0;
+        } else {
+            decimalValueOfCharacter(otherValue[otherSize-i],temp);
+            values[2] = temp;
+        }
+
+        values[0] += values[1] + values[2];
+
+        int nextPower = values[0]/16;
+        values[0] -= nextPower * 16;
+        std::cout << nextPower << " " << values[0] << " " << values[1] << " " << values[2] << " " << std::endl;
+        this->value[thisSize+thisSizeGrowth-i] = validCharacters[values[0]];
+        values[0] = nextPower;
+        if(i >= thisSize+thisSizeGrowth){
+            if((i < otherSize) || (values[0] > 0)){
+                value = validCharacters[0] + value;
+                thisSizeGrowth++;
+            }
+        }
+
+    }
+
+    delete [] values;
     return this;
 }

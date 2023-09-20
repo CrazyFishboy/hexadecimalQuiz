@@ -11,5 +11,10 @@ int main(){
     }
     std::cout << x << std::endl;
 
+    Hexadecimal a("FFFFF");
+    Hexadecimal b("200");
+    a.addHex(b);
+    std::cout << a.getValue() << std::endl;
+
     return 0;
 }
