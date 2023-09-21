@@ -32,6 +32,17 @@ bool Hexadecimal::isValidCharacter(char character){
     return false;
 }
 
+
+/**
+ * @brief Static function. 
+ * Returns boolean value for if the argument is a character within the validCharacters array.
+ * Also sets the index parameter to be the index in the validCharacters array that the character is located
+ * 
+ * @param character, a char to be checked
+ * @param &index, the variable to store the index of the character
+ * @return true, the char is present in the array
+ * @return false, the char is not present in the array
+ */
 bool Hexadecimal::decimalValueOfCharacter(char character, int &index){
     for(int i = 0; i < base; ++i){
         if(std::tolower(character) == tolower(validCharacters[i])){
@@ -43,6 +54,12 @@ bool Hexadecimal::decimalValueOfCharacter(char character, int &index){
 }
 
 
+/**
+ * @brief Sets the value of the object to the value provided. If the value provided is invalid,
+ * sets the value of the object to 0.
+ * 
+ * @param val, The hexadecimal value as a string
+ */
 Hexadecimal::Hexadecimal(std::string val){
     if(!setValue(val)){
         value = "0";
