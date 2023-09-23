@@ -32,13 +32,16 @@ bool Hexadecimal::isValidCharacter(char character){
     return false;
 }
 
+
 /**
- * @brief Finds the index of the character argument in the validCharacters array
+ * @brief Static function. 
+ * Returns boolean value for if the argument is a character within the validCharacters array.
+ * Also sets the index parameter to be the index in the validCharacters array that the character is located
  * 
- * @param character, the character being checked 
- * @param index, variable to store the index that the character is at
- * @return true, the character was a valid character
- * @return false, the character was not a valid character
+ * @param character, a char to be checked
+ * @param &index, the variable to store the index of the character
+ * @return true, the char is present in the array
+ * @return false, the char is not present in the array
  */
 bool Hexadecimal::decimalValueOfCharacter(char character, int &index){
     for(int i = 0; i < base; ++i){
@@ -151,12 +154,23 @@ Hexadecimal* Hexadecimal::addDecimal(int val){
 
 
 Hexadecimal* Hexadecimal::addHex(const Hexadecimal &hex){
-    int * values = new int [3]; // 0 is remainder from previous, 1 is this object, 2 is hex object
+    int * values = new int [3]; 
     values[0] = 0;
-    std::string otherValue = hex.getValue();
-    int thisSize = getSize();
-    int thisSizeGrowth = 0;
-    int otherSize = hex.getSize();
+    std::string otherValue = hex.getValue(); // value of the hex object being added to this one
+    int thisSize = getSize(); // size of this objects hex value
+    int thisSizeGrowth = 0; // Keeps track of how many digits had to be added to this object
+    int otherSize = hex.getSize(); // size of the value of the hex object being added to this one
+
+    /*
+        This function loops through every character of this object's value.
+        The values array will store the integer value of this object's value at the current index in 
+        values[1], it will do the same with the other object and store it in values[2].
+        It will then store their sum in values[0]. The number of multiples of 16 within this sum is found,
+        this will be added to the sum of the values at the next power. These multiples of 16 are then taken out
+        of values[0]. The value of this object at the current index is then set to values[0] as a character.
+        Then values[0] is set to the next power's value for the next iteration. On the next iteration, the 
+        values of values[1] and values[2] will be added to this value.
+    */
     for(int i = 1; i <= thisSize+thisSizeGrowth; ++i){
         int temp = 0;
         decimalValueOfCharacter(value[thisSize-i-thisSizeGrowth],temp);
@@ -176,10 +190,10 @@ Hexadecimal* Hexadecimal::addHex(const Hexadecimal &hex){
         std::cout << nextPower << " " << values[0] << " " << values[1] << " " << values[2] << " " << std::endl;
         this->value[thisSize+thisSizeGrowth-i] = validCharacters[values[0]];
         values[0] = nextPower;
-        if(i >= thisSize+thisSizeGrowth){
-            if((i < otherSize) || (values[0] > 0)){
-                value = validCharacters[0] + value;
-                thisSizeGrowth++;
+        if(i >= thisSize+thisSizeGrowth){ // Checks if i is on the left-most character of the string
+            if((i < otherSize) || (values[0] > 0)){ // If the other object is longer, or if there is a value for the next power
+                value = validCharacters[0] + value; // Add a zero character before the rest of value
+                thisSizeGrowth++; // Reflect the increase in size
             }
         }
 
