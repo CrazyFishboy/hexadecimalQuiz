@@ -32,6 +32,14 @@ bool Hexadecimal::isValidCharacter(char character){
     return false;
 }
 
+/**
+ * @brief Finds the index of the character argument in the validCharacters array
+ * 
+ * @param character, the character being checked 
+ * @param index, variable to store the index that the character is at
+ * @return true, the character was a valid character
+ * @return false, the character was not a valid character
+ */
 bool Hexadecimal::decimalValueOfCharacter(char character, int &index){
     for(int i = 0; i < base; ++i){
         if(std::tolower(character) == tolower(validCharacters[i])){
@@ -43,6 +51,11 @@ bool Hexadecimal::decimalValueOfCharacter(char character, int &index){
 }
 
 
+/**
+ * @brief Constructs a Hexadecimal object from a string. If the provided string is not suitable, sets the value ot 0
+ * 
+ * @param val, the hexadecimal value to set this object to
+ */
 Hexadecimal::Hexadecimal(std::string val){
     if(!setValue(val)){
         value = "0";
@@ -74,6 +87,7 @@ Hexadecimal* Hexadecimal::operator++(){
     value = validCharacters[1] + value;
     return this;
 }
+
 
 /**
  * @brief Assignment operator overload. Assigns the value of the object on the right

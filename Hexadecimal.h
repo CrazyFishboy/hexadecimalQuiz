@@ -29,6 +29,7 @@ static bool decimalValueOfCharacter(char character, int &index);
 Hexadecimal() : Hexadecimal("0"){}
 Hexadecimal(std::string val);
 Hexadecimal* operator++();
+Hexadecimal* operator--();
 Hexadecimal* operator++(int); // Need to define assignment operator first
 Hexadecimal* operator=(Hexadecimal *right);
 /* Need to add:
