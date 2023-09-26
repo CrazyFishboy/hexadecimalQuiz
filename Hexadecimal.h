@@ -14,7 +14,7 @@
 #define HEXADECIMAL_H
 
 #include <string>
-
+#include <cmath>
 #include <iostream>
 
 class Hexadecimal{
@@ -28,10 +28,12 @@ static bool decimalValueOfCharacter(char character, int &index);
 
 Hexadecimal() : Hexadecimal("0"){}
 Hexadecimal(std::string val);
+Hexadecimal(int val);
 Hexadecimal* operator++();
 Hexadecimal* operator--();
 Hexadecimal* operator++(int); // Need to define assignment operator first
 Hexadecimal* operator=(Hexadecimal *right);
+
 /* Need to add:
 *copy constructor
 *assignment operator

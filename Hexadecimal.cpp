@@ -65,6 +65,23 @@ Hexadecimal::Hexadecimal(std::string val){
     }
 }
 
+
+Hexadecimal::Hexadecimal(int val){
+    std::cout << "convert constructor from int is running" << std::endl;
+    int power = 0;
+    while(std::pow(16,power+1) <= val){
+        ++power;
+    }
+    int index = 0;
+    std::string workingValue = "";
+    for(;power >= 0; --power){
+        index = val / std::pow(16,power);
+        workingValue += validCharacters[index];
+        val = val - (std::pow(16,power) * index);
+    }
+    this->value = workingValue;
+}
+
 /**
  * @brief Adds 1 to the current value of the object, then returns a pointer to this object
  * 
