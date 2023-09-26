@@ -148,19 +148,22 @@ bool Hexadecimal::setValue(std::string val){
 }
 
 bool Hexadecimal::setValue(int val){
-    int power = 0;
-    while(std::pow(16,power+1) <= val){
-        ++power;
+    if(val >= 0){
+        int power = 0;
+        while(std::pow(16,power+1) <= val){
+            ++power;
+        }
+        int index = 0;
+        std::string workingValue = "";
+        for(;power >= 0; --power){
+            index = val / std::pow(16,power);
+            workingValue += validCharacters[index];
+            val = val - (std::pow(16,power) * index);
+        }
+        this->value = workingValue;
+        return true;
     }
-    int index = 0;
-    std::string workingValue = "";
-    for(;power >= 0; --power){
-        index = val / std::pow(16,power);
-        workingValue += validCharacters[index];
-        val = val - (std::pow(16,power) * index);
-    }
-    this->value = workingValue;
-    return true;
+    return false;
 }
 
 
