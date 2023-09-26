@@ -27,7 +27,8 @@ static bool isValidCharacter(char character);
 static bool decimalValueOfCharacter(char character, int &index);
 
 Hexadecimal() : Hexadecimal("0"){}
-Hexadecimal(std::string val);
+Hexadecimal(const std::string val);
+Hexadecimal(const char *val);
 Hexadecimal(int val);
 Hexadecimal* operator++();
 Hexadecimal* operator--();

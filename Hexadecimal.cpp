@@ -65,6 +65,13 @@ Hexadecimal::Hexadecimal(std::string val){
     }
 }
 
+Hexadecimal::Hexadecimal(const char *val){
+    std::string temp = val;
+    if(!setValue(temp)){
+        value = "0";
+    }
+}
+
 
 Hexadecimal::Hexadecimal(int val){
     if(!setValue(val)){
