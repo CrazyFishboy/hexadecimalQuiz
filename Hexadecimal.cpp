@@ -106,9 +106,54 @@ Hexadecimal* Hexadecimal::operator++(){
  * @param right, the object being copied
  * @return Hexadecimal*, returns a pointer to this object
  */
-Hexadecimal* Hexadecimal::operator=(Hexadecimal *right){
+Hexadecimal* Hexadecimal::operator=(const Hexadecimal *right){
     this->value = right->value;
     return this;
+}
+
+Hexadecimal Hexadecimal::operator+(const Hexadecimal &right){
+    Hexadecimal hexReturn;
+    std::string tempStr = "";
+    int * values = new int [3]; 
+    values[0] = 0;
+    std::string otherValue = right.getValue(); // value of the hex object being added to this one
+    int thisSize = getSize(); // size of this objects hex value
+    int sizeGrowth = 0; // Keeps track of how many digits had to be added to this object
+    int otherSize = right.getSize(); // size of the value of the hex object being added to this one
+
+    for(int i = 1; i <= thisSize+sizeGrowth; ++i){
+        int temp = 0;
+        decimalValueOfCharacter(value[thisSize-i-sizeGrowth],temp);
+        values[1] = temp;
+
+        if(otherSize - i < 0){
+            values[2] = 0;
+        } else {
+            decimalValueOfCharacter(otherValue[otherSize-i],temp);
+            values[2] = temp;
+        }
+
+        values[0] += values[1] + values[2];
+
+        int nextPower = values[0]/16;
+        values[0] -= nextPower * 16;
+        std::cout << nextPower << " " << values[0] << " " << values[1] << " " << values[2] << " " << std::endl;
+        tempStr = validCharacters[values[0]] + tempStr;
+        values[0] = nextPower;
+        if(i >= thisSize+sizeGrowth){ // Checks if i is on the left-most character of the string
+            if((i < otherSize) || (values[0] > 0)){ // If the other object is longer, or if there is a value for the next power
+                value = validCharacters[0] + value; // Add a zero character before the rest of value
+                sizeGrowth++; // Reflect the increase in size
+            }
+        }
+
+    }
+
+    delete [] values;
+    std::cout << "temp:" << tempStr << std::endl;
+    hexReturn.setValue(tempStr);
+    std::cout << "hexReturn: " << hexReturn << std::endl;
+    return hexReturn;
 }
 
 Hexadecimal::operator int() const{

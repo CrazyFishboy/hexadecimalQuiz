@@ -4,8 +4,11 @@
 
 
 int main(){
-    Hexadecimal a("FfF");
-    int i = a;
-    std::cout << a << ": " << i << std::endl;
+    Hexadecimal a("FfF00");
+    Hexadecimal b("ff");
+    Hexadecimal d(1);
+    Hexadecimal c;
+    c = a + b + d;
+    std::cout << a << " + " << b << " + " << d << " = " << c << std::endl;
     return 0;
 }

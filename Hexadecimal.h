@@ -32,7 +32,8 @@ Hexadecimal(int val);
 Hexadecimal* operator++();
 Hexadecimal* operator--();
 Hexadecimal* operator++(int); // Need to define assignment operator first
-Hexadecimal* operator=(Hexadecimal *right);
+Hexadecimal* operator=(const Hexadecimal *right);
+Hexadecimal operator+(const Hexadecimal &right);
 operator int() const;// Need to implement
 friend std::ostream &operator<<(std::ostream &out, Hexadecimal obj);
 /* Need to add:
