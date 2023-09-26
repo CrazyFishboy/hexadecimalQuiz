@@ -33,7 +33,7 @@ Hexadecimal* operator++();
 Hexadecimal* operator--();
 Hexadecimal* operator++(int); // Need to define assignment operator first
 Hexadecimal* operator=(Hexadecimal *right);
-
+operator int() const;// Need to implement
 /* Need to add:
 *copy constructor
 *assignment operator
@@ -51,6 +51,7 @@ int getSize() const {
 }
 
 bool setValue(std::string val);
+bool setValue(int val);
 Hexadecimal* addHex(const Hexadecimal &hex);
 Hexadecimal* addDecimal(int val);
 
