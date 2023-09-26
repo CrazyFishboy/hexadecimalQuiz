@@ -111,6 +111,18 @@ Hexadecimal* Hexadecimal::operator=(Hexadecimal *right){
     return this;
 }
 
+Hexadecimal::operator int() const{
+    int val = 0;
+    int power = 0;
+    int temp = 0;
+    for(int i = this->value.length()-1; i >= 0; --i){
+        decimalValueOfCharacter(value[i],temp);
+        val += std::pow(16,power) * temp;
+        ++power;
+    }
+    return val;
+}
+
 
 /**
  * @brief Sets the value of the object to the one provided
