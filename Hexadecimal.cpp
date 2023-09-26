@@ -65,6 +65,11 @@ Hexadecimal::Hexadecimal(std::string val){
     }
 }
 
+/**
+ * @brief Constructs a Hexadecimal object from a c-string
+ * 
+ * @param val, the Hexadcimal value to set this object to
+ */
 Hexadecimal::Hexadecimal(const char *val){
     std::string temp = val;
     if(!setValue(temp)){
@@ -73,6 +78,11 @@ Hexadecimal::Hexadecimal(const char *val){
 }
 
 
+/**
+ * @brief Constructs a Hexadecimal object from an integer
+ * 
+ * @param val, the hexadecimal value to set this object to
+ */
 Hexadecimal::Hexadecimal(int val){
     if(!setValue(val)){
         value = "0";
@@ -118,6 +128,13 @@ Hexadecimal* Hexadecimal::operator=(const Hexadecimal *right){
     return this;
 }
 
+
+/**
+ * @brief Adds the values of this object and another and stores it in a third object
+ * 
+ * @param right, the second value being added
+ * @return Hexadecimal, a Hexadecimal object storing the sum of the other two objects
+ */
 Hexadecimal Hexadecimal::operator+(const Hexadecimal &right){
     Hexadecimal hexReturn;
     std::string tempStr = "";
@@ -163,6 +180,12 @@ Hexadecimal Hexadecimal::operator+(const Hexadecimal &right){
     return hexReturn;
 }
 
+
+/**
+ * @brief Conerts this object to an integer
+ * 
+ * @return int, the integer value of the object
+ */
 Hexadecimal::operator int() const{
     int val = 0;
     int power = 0;
