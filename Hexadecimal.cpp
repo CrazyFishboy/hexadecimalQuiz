@@ -124,6 +124,12 @@ Hexadecimal::operator int() const{
 }
 
 
+std::ostream &operator<<(std::ostream &out, Hexadecimal obj){
+    out << obj.getValue();
+    return out;
+}
+
+
 /**
  * @brief Sets the value of the object to the one provided
  * 
@@ -149,7 +155,7 @@ bool Hexadecimal::setValue(std::string val){
                     nonZeroEncounterd = true;
                 }
                 if(nonZeroEncounterd){
-                    newVal += val[index];
+                    newVal += std::toupper(val[index]);
                 }
             }
         }

@@ -34,6 +34,7 @@ Hexadecimal* operator--();
 Hexadecimal* operator++(int); // Need to define assignment operator first
 Hexadecimal* operator=(Hexadecimal *right);
 operator int() const;// Need to implement
+friend std::ostream &operator<<(std::ostream &out, Hexadecimal obj);
 /* Need to add:
 *copy constructor
 *assignment operator
