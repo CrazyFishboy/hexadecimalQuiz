@@ -246,7 +246,16 @@ bool Hexadecimal::setValue(std::string val){
     return false;
 }
 
+
+/**
+ * @brief Sets the value of the object to the one provided
+ * 
+ * @param val, the value to set the object's to. Val is assumed to be in base 10
+ * @return true, the provided value was valid and the object's value was updated
+ * @return false, the provided value was not valid and the object's value was not updated
+ */
 bool Hexadecimal::setValue(int val){
+    // Calculates the greatest power of 16 within val
     if(val >= 0){
         int power = 0;
         while(std::pow(16,power+1) <= val){
@@ -254,6 +263,8 @@ bool Hexadecimal::setValue(int val){
         }
         int index = 0;
         std::string workingValue = "";
+        // Finds whether val contains a power of 16, and removes
+        // 16 from it if it does.
         for(;power >= 0; --power){
             index = val / std::pow(16,power);
             workingValue += validCharacters[index];
