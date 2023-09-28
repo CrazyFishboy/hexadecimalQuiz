@@ -1,5 +1,5 @@
 #include <iostream>
-//#include "Hexadecimal.h"
+#include "Hexadecimal.h"
 //#include <fstream>
 #include <ctime>
 #include <random>
@@ -11,7 +11,8 @@ int main(){
     unsigned max = 16;
     std::srand(std::time(0));
     int rand = std::rand() % max;
-    std::cout << "Hexadecimal: 0x" << std::hex << rand << std::endl;
+    Hexadecimal secret(rand);
+    std::cout << "Hexadecimal: 0x" << secret << std::endl;
     std::cout << "Decimal?: ";
     std::string input;
     std::getline(std::cin, input);
