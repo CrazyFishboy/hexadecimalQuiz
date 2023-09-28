@@ -199,6 +199,12 @@ Hexadecimal::operator int() const{
 }
 
 
+/**
+ * @brief Outputs the value of the hexadecimal for use with the stream insertion operator (<<)
+ * 
+ * @param out, the ostream being edited
+ * @param obj, the object being added to the ostream
+ */
 std::ostream &operator<<(std::ostream &out, Hexadecimal obj){
     out << obj.getValue();
     return out;
