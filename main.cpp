@@ -8,7 +8,8 @@
 std::string cleanInput(const std::string &in);
 
 int main(){
-    unsigned max = 16;
+    unsigned long long powers[] = {1,16,256,4096,65536,1048576,16777216,268435456,4294967296};
+    unsigned max = powers[4];
     std::srand(std::time(0));
     int rand = std::rand() % max;
     Hexadecimal secret(rand);
