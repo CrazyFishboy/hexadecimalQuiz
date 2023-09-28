@@ -1,14 +1,18 @@
 #include <iostream>
-#include "Hexadecimal.h"
-#include <fstream>
+//#include "Hexadecimal.h"
+//#include <fstream>
+#include <ctime>
+#include <random>
+#include <string>
 
 
 int main(){
-    Hexadecimal a("FfF000");
-    Hexadecimal b("ff0");
-    Hexadecimal d = "0xf1";
-    Hexadecimal c;
-    c = a + b + d;
-    std::cout << a << " + " << b << " + " << d << " = " << c << std::endl;
+    unsigned max = 16*16*16*16;
+    std::srand(std::time(0));
+    int rand = std::rand() % max;
+    std::cout << "Hexadecimal: 0x" << std::hex << rand << std::endl;
+    std::cout << "Decimal?: ";
+    
+    
     return 0;
 }
