@@ -16,7 +16,8 @@ int main() {
     std::getline(std::cin, input);
     std::cout << "You entered \'" << input << "\'" << std::endl;
 
-    Hexadecimal hex(input);
+    Hexadecimal hex(1);
+    hex = "@#ASD";
     if(hex.fail()){
         std::cout << "Invalid input" << std::endl;
     } else {
