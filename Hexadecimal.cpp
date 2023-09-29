@@ -237,6 +237,7 @@ bool Hexadecimal::setValue(std::string val){
         bool nonZeroEncounterd = false;
         for(; index < val.size(); ++index){
             if(!isValidCharacter(val[index])){
+                failure = false;
                 return false;
             } else {
                 if(!nonZeroEncounterd && val[index] != validCharacters[0]){
