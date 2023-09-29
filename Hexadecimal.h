@@ -58,8 +58,12 @@ bool setValue(int val);
 Hexadecimal* addHex(const Hexadecimal &hex);
 Hexadecimal* addDecimal(int val);
 
+bool fail();
+void resetFlag();
+
 protected:
 std::string value;
+bool failure;
 
 };
 #endif

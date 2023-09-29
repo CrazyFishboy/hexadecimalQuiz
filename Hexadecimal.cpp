@@ -62,6 +62,9 @@ bool Hexadecimal::decimalValueOfCharacter(char character, int &index){
 Hexadecimal::Hexadecimal(std::string val){
     if(!setValue(val)){
         value = "0";
+        failure = true;
+    } else {
+        failure = false;
     }
 }
 
@@ -74,6 +77,9 @@ Hexadecimal::Hexadecimal(const char *val){
     std::string temp = val;
     if(!setValue(temp)){
         value = "0";
+        failure = true;
+    } else {
+        failure = false;
     }
 }
 
@@ -86,6 +92,9 @@ Hexadecimal::Hexadecimal(const char *val){
 Hexadecimal::Hexadecimal(int val){
     if(!setValue(val)){
         value = "0";
+        failure = true;
+    } else {
+        failure = false;
     }
 }
 
@@ -174,9 +183,7 @@ Hexadecimal Hexadecimal::operator+(const Hexadecimal &right){
     }
 
     delete [] values;
-    std::cout << "temp:" << tempStr << std::endl;
     hexReturn.setValue(tempStr);
-    std::cout << "hexReturn: " << hexReturn << std::endl;
     return hexReturn;
 }
 
@@ -241,8 +248,10 @@ bool Hexadecimal::setValue(std::string val){
             }
         }
         value = newVal;
+        failure = false;
         return true;
     }
+    failure = true;
     return false;
 }
 
@@ -271,8 +280,10 @@ bool Hexadecimal::setValue(int val){
             val = val - (std::pow(16,power) * index);
         }
         this->value = workingValue;
+        failure = false;
         return true;
     }
+    failure = true;
     return false;
 }
 
@@ -337,4 +348,15 @@ Hexadecimal* Hexadecimal::addHex(const Hexadecimal &hex){
 
     delete [] values;
     return this;
+}
+
+
+
+bool Hexadecimal::fail() {
+    return this->failure;
+}
+
+
+void Hexadecimal::resetFlag() {
+    this->failure = false;
 }
