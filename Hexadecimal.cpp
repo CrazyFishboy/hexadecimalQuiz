@@ -168,8 +168,8 @@ Hexadecimal Hexadecimal::operator+(const Hexadecimal &right){
 
         values[0] += values[1] + values[2];
 
-        int nextPower = values[0]/16;
-        values[0] -= nextPower * 16;
+        int nextPower = values[0]/base;
+        values[0] -= nextPower * base;
         std::cout << nextPower << " " << values[0] << " " << values[1] << " " << values[2] << " " << std::endl;
         tempStr = validCharacters[values[0]] + tempStr;
         values[0] = nextPower;
@@ -199,7 +199,7 @@ Hexadecimal::operator int() const{
     int temp = 0;
     for(int i = this->value.length()-1; i >= 0; --i){
         decimalValueOfCharacter(value[i],temp);
-        val += std::pow(16,power) * temp;
+        val += std::pow(base,power) * temp;
         ++power;
     }
     return val;
@@ -268,7 +268,7 @@ bool Hexadecimal::setValue(int val){
     // Calculates the greatest power of 16 within val
     if(val >= 0){
         int power = 0;
-        while(std::pow(16,power+1) <= val){
+        while(std::pow(base,power+1) <= val){
             ++power;
         }
         int index = 0;
@@ -276,9 +276,9 @@ bool Hexadecimal::setValue(int val){
         // Finds whether val contains a power of 16, and removes
         // 16 from it if it does.
         for(;power >= 0; --power){
-            index = val / std::pow(16,power);
+            index = val / std::pow(base,power);
             workingValue += validCharacters[index];
-            val = val - (std::pow(16,power) * index);
+            val = val - (std::pow(base,power) * index);
         }
         this->value = workingValue;
         failure = false;
@@ -333,8 +333,8 @@ Hexadecimal* Hexadecimal::addHex(const Hexadecimal &hex){
 
         values[0] += values[1] + values[2];
 
-        int nextPower = values[0]/16;
-        values[0] -= nextPower * 16;
+        int nextPower = values[0]/base;
+        values[0] -= nextPower * base;
         std::cout << nextPower << " " << values[0] << " " << values[1] << " " << values[2] << " " << std::endl;
         this->value[thisSize+thisSizeGrowth-i] = validCharacters[values[0]];
         values[0] = nextPower;
