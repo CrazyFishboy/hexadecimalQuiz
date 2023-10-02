@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Hexadecimal.h"
+#include "binary.h"
 #include <cstdlib>
 #include <string>
 
@@ -39,6 +40,8 @@ int main(int argc, char *argv[]) {
     std::cout << "Hex:\nDec:\nOct:\nBin:" << std::endl;
     Hexadecimal hex;
 
+/*
+    // Gets input from user
     do {
         std::cout << "Enter a number: ";
         std::string input;
@@ -52,6 +55,12 @@ int main(int argc, char *argv[]) {
             std::cout << hex << std::endl;
         }
     } while(hex.fail());
+
+*/
+
+    Binary test("");
+    std::cout << test.getValue() << std::endl;
+
 
 
     return 0;
