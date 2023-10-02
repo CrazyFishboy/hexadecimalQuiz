@@ -58,7 +58,9 @@ int main(int argc, char *argv[]) {
 
 */
 
-    Binary test("");
+    Binary test(-1);
+    std::cout << test.getValue() << std::endl;
+    test.makeBytes();
     std::cout << test.getValue() << std::endl;
 
 
