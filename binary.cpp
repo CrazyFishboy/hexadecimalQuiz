@@ -2,19 +2,22 @@
 
 
 Binary::Binary(std::string str){
+    if(!setValue(str)){
+        this->value = "0";
+    }
+}
+
+
+bool Binary::setValue(std::string str){
     if(str.size() > 0){
-        bool valid = true;
         for(unsigned i = 0; i < str.size(); ++i){
             if(str[i] != '0' && str[i] != '1'){
-                valid = false;
+                return false;
             }
         }
-        if(valid){
-            this->value = str;
-        } else {
-            this->value = "0";
-        }
+        this->value = str;
+        return true;
     } else {
-        this->value = "0";
+        return false;
     }
 }

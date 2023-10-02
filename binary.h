@@ -10,12 +10,13 @@ class Binary {
 public:
     
     Binary() : Binary("0") {}
-    Binary(std::string);
+    Binary(std::string str);
 
 
     std::string getValue() const {
         return value;
     }
+    bool setValue(std::string str);
 
 
 private:
