@@ -21,3 +21,10 @@ bool Binary::setValue(std::string str){
         return false;
     }
 }
+
+bool Binary::makeBytes(){
+    while(value.size() % 8 != 0){
+        value = "0" + value;
+    }
+    return true;
+}

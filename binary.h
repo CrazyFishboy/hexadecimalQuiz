@@ -17,6 +17,7 @@ public:
         return value;
     }
     bool setValue(std::string str);
+    bool makeBytes();
 
 
 private:
