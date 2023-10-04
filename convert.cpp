@@ -104,11 +104,16 @@ int main(int argc, char *argv[]) {
                 printHelp();
                 exit(1);
             }
+
+
+            else if(i == argc-1 && !numberSpecified){
+                numberStr = argument;
+            }
         }
     }
 
-    if(!numberSpecified){
-        std::cout << "A number must be specified. Use -n <number>" << std::endl;
+    if(numberStr == ""){
+        std::cout << "A number must be specified. Place the number after your flags." << std::endl;
         exit(1);
     }
 
