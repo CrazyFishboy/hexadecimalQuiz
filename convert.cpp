@@ -16,6 +16,7 @@ Command-line arguments structure should be:
 
 */
 
+void display(uint64_t num);
 
 int main(int argc, char *argv[]) {
 
@@ -28,23 +29,23 @@ int main(int argc, char *argv[]) {
     }
 
 
-    int num = 1103;
+    uint64_t num = 1103;
+    display(num);
+
+
+    return 0;
+}
+
+void display(uint64_t num){
     unsigned counter = 0;
     std::string binary = "";
     while((num>>counter)>0){
         binary = std::to_string((num >> counter) & 1) + binary;
         ++counter;
     }
-    
     std::cout << std::showbase << std::endl;
     std::cout << std::hex << "Hexadecimal: " << num << std::endl;
     std::cout << std::dec << "Decimal: " << num << std::endl;
     std::cout << std::oct << "Octal: " << num << std::endl;
-    std::cout << "Binary: " << binary << std::endl;
-
-
-
-
-
-    return 0;
+    std::cout << std::dec << "Binary: " << binary << std::endl;
 }
