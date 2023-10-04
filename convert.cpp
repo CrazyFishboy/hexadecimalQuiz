@@ -19,6 +19,7 @@ const char validDigits[16] = {'0','1','2','3','4','5','6','7','8','9','A','B','C
 
 void display(uint64_t num, int base = 0);
 uint64_t convertBase(std::string str, int base);
+void printHelp();
 
 int main(int argc, char *argv[]) {
     bool numberSpecified = false;
@@ -100,13 +101,7 @@ int main(int argc, char *argv[]) {
 
 
             else if(argument == "-h" || argument == "--help"){
-                std::cout << "Usage: <executable> [options]" << std::endl;
-                std::cout << "Options:\n  -n <number>\tNumber to be converted. Required. Base specifiers " << std::endl;
-                std::cout << "\t\t(0b=2,0=8,0x=16) can preceed the number to allow inferring\n";
-                std::cout << "\t\tthe base of the number"<< std::endl;
-                std::cout << "  -b <number>\tBase of the specified number. Can be 2,8,10,16. Default is 10" << std::endl;
-                std::cout << "  -o <number>\tBase of the number output. Can be 2,8,10,16. If not specified\n";
-                std::cout << "\t\tthe value will be displayed in the 4 bases" << std::endl;
+                printHelp();
                 exit(1);
             }
         }
@@ -228,4 +223,15 @@ uint64_t convertBase(std::string str, int base){
         value += charVal * (std::pow(base,str.size()-i));
     }
     return value;
+}
+
+
+void printHelp(){
+    std::cout << "Usage: <executable> [options]" << std::endl;
+    std::cout << "Options:\n  -n <number>\tNumber to be converted. Required. Base specifiers " << std::endl;
+    std::cout << "\t\t(0b=2,0=8,0x=16) can preceed the number to allow inferring\n";
+    std::cout << "\t\tthe base of the number"<< std::endl;
+    std::cout << "  -b <number>\tBase of the specified number. Can be 2,8,10,16. Default is 10" << std::endl;
+    std::cout << "  -o <number>\tBase of the number output. Can be 2,8,10,16. If not specified\n";
+    std::cout << "\t\tthe value will be displayed in the 4 bases" << std::endl;
 }
