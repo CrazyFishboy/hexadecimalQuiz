@@ -21,19 +21,97 @@ void display(uint64_t num);
 uint64_t convertBase(std::string str, int base);
 
 int main(int argc, char *argv[]) {
+    bool numberSpecified = false;
+    bool baseSpecified = false;
+    bool outputSpecified = false;
 
+    std::string numberStr = "";
+    std::string baseStr = "";
+    std::string outputBaseStr = "";
+
+    int base = 0;
+    int outputBase = 0;
 
     if(argc >1){
         std::cout << "Command line arguments detected... They are:" << std::endl;
-        for(int i = 0; i < argc; ++i){
-            std::cout << i << ": \'" << *(argv+i) << "\'" << std::endl;
+        std::string argument = "";
+        for(int i = 1; i < argc; ++i){
+            argument = *(argv+i);
+            if(argument == "-n" || argument == "--number"){
+                if(numberSpecified){
+                    std::cout << "Multiple uses of -n flag is not allowed" << std::endl;
+                    exit(1);
+                }
+                numberSpecified = true;
+                if(i+1 < argc){ // If there is another argument after flag
+                    if(*(argv+i+1)[0] != '-'){ // If the next argument does not start with '-'
+                        numberStr = *(argv+i+1);
+                        ++i;
+                    } else {
+                        std::cout << "No number detected after -n flag" << std::endl;
+                        exit(1);
+                    }
+                } else {
+                    std::cout << "No number detected after -n flag" << std::endl;
+                    exit(1);
+                }
+            } 
+            
+            
+            else if(argument == "-b" || argument == "--base"){
+                if(baseSpecified){
+                    std::cout << "Multiple uses of -b flag is not allowed" << std::endl;
+                    exit(1);
+                }
+                baseSpecified = true;
+                if(i+1 < argc){ // If there is another argument after flag
+                    if(*(argv+i+1)[0] != '-'){ // If the next argument does not start with '-'
+                        baseStr = *(argv+i+1);
+                        ++i;
+                    } else {
+                        std::cout << "No number detected after -b flag" << std::endl;
+                        exit(1);
+                    }
+                } else {
+                    std::cout << "No number detected after -b flag" << std::endl;
+                    exit(1);
+                }
+            } 
+            
+            
+            else if(argument == "-o" || argument == "--output"){
+                if(outputSpecified){
+                    std::cout << "Multiple uses of -o flag is not allowed" << std::endl;
+                    exit(1);
+                }
+                outputSpecified = true;
+                if(i+1 < argc){ // If there is another argument after flag
+                    if(*(argv+i+1)[0] != '-'){ // If the next argument does not start with '-'
+                        outputBaseStr = *(argv+i+1);
+                        ++i;
+                    } else {
+                        std::cout << "No number detected after -o flag" << std::endl;
+                        exit(1);
+                    }
+                } else {
+                    std::cout << "No number detected after -o flag" << std::endl;
+                    exit(1);
+                }
+            }
+
+
+            else if(argument == "-h" || argument == "--help"){
+                std::cout << "This will be a help message" << std::endl;
+                exit(1);
+            }
         }
     }
 
-    std::string test = "1D";
-    int num = 0;
-    num = convertBase(test,16);
-    std::cout << num << std::endl;
+    std::cout << numberStr << std::endl << baseStr << std::endl << outputBaseStr << std::endl;
+    if(!numberSpecified){
+        std::cout << "A number must be specified. Use -n <number>" << std::endl;
+        exit(1);
+    }
 
 
 
