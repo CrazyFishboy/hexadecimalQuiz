@@ -113,6 +113,25 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
+    if(baseSpecified){
+        if(baseStr == "2"){
+            base = 2;
+        } else if(baseStr == "8"){
+            base = 8;
+        } else if(baseStr == "10"){
+            base = 10;
+        } else if(baseStr == "16"){
+            base = 16;
+        } else {
+            std::cout << "Invalid base specified. Supported bases are 2,8,10,16" << std::endl;
+            exit(1);
+        }
+    } else {
+        base = 10;
+    }
+
+    std::cout << "Base: " << base << std::endl;
+
 
 
     return 0;
