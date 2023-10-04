@@ -127,7 +127,23 @@ int main(int argc, char *argv[]) {
             exit(1);
         }
     } else {
-        base = 10;
+        if(numberStr.size() > 2){
+            if(numberStr[0] == '0'){
+                if(numberStr[1] == 'b' || numberStr[1] == 'B'){
+                    base = 2;
+                } else if(numberStr[1] == 'o' || numberStr[1] == 'O'){
+                    base = 8;
+                } else if(numberStr[1] == 'x' || numberStr[1] == 'X'){
+                    base = 16;
+                } else {
+                    base = 8;
+                }
+            } else {
+                base = 10;
+            }
+        } else {
+            base = 10;
+        }
     }
 
     std::cout << "Base: " << base << std::endl;
