@@ -149,6 +149,23 @@ int main(int argc, char *argv[]) {
     std::cout << "Base: " << base << std::endl;
 
 
+    if(outputSpecified){
+        if(outputBaseStr == "2"){
+            outputBase = 2;
+        } else if(outputBaseStr == "8"){
+            outputBase = 8;
+        } else if(outputBaseStr == "10"){
+            outputBase = 10;
+        } else if(outputBaseStr == "16"){
+            outputBase = 16;
+        } else {
+            std::cout << "Invalid output base specified. Supported bases are 2,8,10,16" << std::endl;
+            exit(1);
+        }
+    }
+
+    std::cout << "Output base: " << outputBase << std::endl;
+
 
     return 0;
 }
