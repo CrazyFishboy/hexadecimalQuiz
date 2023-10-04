@@ -17,7 +17,7 @@ Command-line arguments structure should be:
 
 const char validDigits[16] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 
-void display(uint64_t num);
+void display(uint64_t num, int base = 0);
 uint64_t convertBase(std::string str, int base);
 
 int main(int argc, char *argv[]) {
@@ -33,7 +33,6 @@ int main(int argc, char *argv[]) {
     int outputBase = 0;
 
     if(argc >1){
-        std::cout << "Command line arguments detected... They are:" << std::endl;
         std::string argument = "";
         for(int i = 1; i < argc; ++i){
             argument = *(argv+i);
@@ -101,13 +100,18 @@ int main(int argc, char *argv[]) {
 
 
             else if(argument == "-h" || argument == "--help"){
-                std::cout << "This will be a help message" << std::endl;
+                std::cout << "Usage: <executable> [options]" << std::endl;
+                std::cout << "Options:\n  -n <number>\tNumber to be converted. Required. Base specifiers " << std::endl;
+                std::cout << "\t\t(0b=2,0=8,0x=16) can preceed the number to allow inferring\n";
+                std::cout << "\t\tthe base of the number"<< std::endl;
+                std::cout << "  -b <number>\tBase of the specified number. Can be 2,8,10,16. Default is 10" << std::endl;
+                std::cout << "  -o <number>\tBase of the number output. Can be 2,8,10,16. If not specified\n";
+                std::cout << "\t\tthe value will be displayed in the 4 bases" << std::endl;
                 exit(1);
             }
         }
     }
 
-    std::cout << numberStr << std::endl << baseStr << std::endl << outputBaseStr << std::endl;
     if(!numberSpecified){
         std::cout << "A number must be specified. Use -n <number>" << std::endl;
         exit(1);
@@ -131,12 +135,16 @@ int main(int argc, char *argv[]) {
             if(numberStr[0] == '0'){
                 if(numberStr[1] == 'b' || numberStr[1] == 'B'){
                     base = 2;
+                    numberStr.assign(numberStr,2);
                 } else if(numberStr[1] == 'o' || numberStr[1] == 'O'){
                     base = 8;
+                    numberStr.assign(numberStr,2);
                 } else if(numberStr[1] == 'x' || numberStr[1] == 'X'){
                     base = 16;
+                    numberStr.assign(numberStr,2);
                 } else {
                     base = 8;
+                    numberStr.assign(numberStr,1);
                 }
             } else {
                 base = 10;
@@ -145,8 +153,6 @@ int main(int argc, char *argv[]) {
             base = 10;
         }
     }
-
-    std::cout << "Base: " << base << std::endl;
 
 
     if(outputSpecified){
@@ -164,28 +170,39 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    std::cout << "Output base: " << outputBase << std::endl;
+
+    uint64_t num = convertBase(numberStr,base);
+    display(num,outputBase);
 
 
     return 0;
 }
 
-void display(uint64_t num){
-
-    // Gets the binary representation of the number
-    unsigned counter = 0;
-    std::string binary = "";
-    while((num>>counter)>0){
-        binary = std::to_string((num >> counter) & 1) + binary;
-        ++counter;
-    }
+void display(uint64_t num, int base){
 
     // Displays the numbers
-    std::cout << std::showbase << std::endl;
-    std::cout << std::hex << "Hexadecimal: " << num << std::endl;
-    std::cout << std::dec << "Decimal: " << num << std::endl;
-    std::cout << std::oct << "Octal: " << num << std::endl;
-    std::cout << std::dec << "Binary: " << binary << std::noshowbase << std::endl;
+    std::cout << std::showbase;
+    if(base == 16 || base == 0){
+        std::cout << std::hex << "Hexadecimal: " << num << std::endl;
+    }
+    if(base == 10 || base == 0){
+        std::cout << std::dec << "Decimal: " << num << std::endl;
+    }
+    if(base == 18 || base == 0){
+        std::cout << std::oct << "Octal: " << num << std::endl;
+    }
+    if(base == 2 || base == 0){
+        // Gets the binary representation of the number
+        unsigned counter = 0;
+        std::string binary = "";
+        while((num>>counter)>0){
+            binary = std::to_string((num >> counter) & 1) + binary;
+            ++counter;
+        }
+        std::cout << "Binary: " << binary <<std::endl;
+    }
+    // Resets display settings
+    std::cout << std::dec << std::noshowbase;
 }
 
 
@@ -199,7 +216,7 @@ uint64_t convertBase(std::string str, int base){
     for(unsigned i = str.size(); i > 0; --i){
         charVal = -1;
         for(int j = 0; j < base; ++j){
-            if(str[i-1] == validDigits[j]){
+            if(std::tolower(str[i-1]) == std::tolower(validDigits[j])){
                 charVal = j;
                 break;
             }
