@@ -175,9 +175,9 @@ int main(int argc, char *argv[]) {
         }
     }
 
-
     uint64_t num = convertBase(numberStr,base);
     display(num,outputBase);
+    
 
 
     return 0;
@@ -200,9 +200,19 @@ void display(uint64_t num, int base){
         // Gets the binary representation of the number
         unsigned counter = 0;
         std::string binary = "";
-        while((num>>counter)>0){
-            binary = std::to_string((num >> counter) & 1) + binary;
+        if(num == 0){
+            binary = "0";
+        }
+        while(num>0){
+            if(counter > 0){
+                binary = std::to_string((num >>= 1) & 1) + binary;
+            } else {
+                binary = std::to_string(num & 1) + binary;
+            }
             ++counter;
+        }
+        while(binary.size() > 1 && binary[0] == '0'){
+            binary.assign(binary,1);
         }
         std::cout << "Binary: " << binary <<std::endl;
     }
