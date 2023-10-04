@@ -32,6 +32,11 @@ int main(int argc, char *argv[]) {
 
     int base = 0;
     int outputBase = 0;
+    
+    if(argc == 1){
+        printHelp();
+        exit(1);
+    }
 
     if(argc >1){
         std::string argument = "";
@@ -232,8 +237,8 @@ uint64_t convertBase(std::string str, int base){
 
 
 void printHelp(){
-    std::cout << "Usage: <executable> [options]" << std::endl;
-    std::cout << "Options:\n  -n <number>\tNumber to be converted. Required. Base specifiers " << std::endl;
+    std::cout << "Usage: <executable> [options] <number>" << std::endl;
+    std::cout << "Options:\n  <number>\tNumber to be converted. Required. Base specifiers " << std::endl;
     std::cout << "\t\t(0b=2,0=8,0x=16) can preceed the number to allow inferring\n";
     std::cout << "\t\tthe base of the number"<< std::endl;
     std::cout << "  -b <number>\tBase of the specified number. Can be 2,8,10,16. Default is 10" << std::endl;
