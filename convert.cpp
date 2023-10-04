@@ -28,22 +28,19 @@ int main(int argc, char *argv[]) {
     }
 
 
-    int num = 2000000000;
+    int num = 1103;
+    unsigned counter = 0;
     std::string binary = "";
-    while(num>0){
-        //std::cout << n;
-        binary = std::to_string(num & 1) + binary;
-        num >>= 1;
+    while((num>>counter)>0){
+        binary = std::to_string((num >> counter) & 1) + binary;
+        ++counter;
     }
     
-    std::cout << binary << std::endl;
-    /*
-    for(unsigned i = binary.size(); i > 0; --i){
-        std::cout << binary[i-1];
-    }
-    std::cout << std::endl;
-
-    */
+    std::cout << std::showbase << std::endl;
+    std::cout << std::hex << "Hexadecimal: " << num << std::endl;
+    std::cout << std::dec << "Decimal: " << num << std::endl;
+    std::cout << std::oct << "Octal: " << num << std::endl;
+    std::cout << "Binary: " << binary << std::endl;
 
 
 
