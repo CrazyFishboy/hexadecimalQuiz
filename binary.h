@@ -22,6 +22,9 @@ public:
     bool setValue(int num);
     bool makeBytes();
 
+    void addValue(int num);
+    
+
 
 private:
     std::string value;

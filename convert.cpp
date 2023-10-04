@@ -17,11 +17,7 @@ Command-line arguments structure should be:
 */
 
 
-/***NEED TO MAKE HEXADECIMAL CLASS SUPPORT MATH OPERATIONS IN THE SET VALUE FUNCTIONS***/
-
 int main(int argc, char *argv[]) {
-
-    short bases[] = {2,8,10,16}; // Binary, Octal, Decimal, Hexadecimal
 
 
     if(argc >1){
@@ -32,36 +28,24 @@ int main(int argc, char *argv[]) {
     }
 
 
+    int num = 2000000000;
+    std::string binary = "";
+    while(num>0){
+        //std::cout << n;
+        binary = std::to_string(num & 1) + binary;
+        num >>= 1;
+    }
+    
+    std::cout << binary << std::endl;
+    /*
+    for(unsigned i = binary.size(); i > 0; --i){
+        std::cout << binary[i-1];
+    }
+    std::cout << std::endl;
 
-    enum {hexMode, decMode, octMode, binMode};
+    */
 
-    short mode = hexMode;
 
-    std::cout << "Hex:\nDec:\nOct:\nBin:" << std::endl;
-    Hexadecimal hex;
-
-/*
-    // Gets input from user
-    do {
-        std::cout << "Enter a number: ";
-        std::string input;
-        std::getline(std::cin, input);
-        std::cout << "You entered \'" << input << "\'" << std::endl;
-
-        hex = input;
-        if(hex.fail()){
-            std::cout << "Invalid input" << std::endl;
-        } else {
-            std::cout << hex << std::endl;
-        }
-    } while(hex.fail());
-
-*/
-
-    Binary test(-1);
-    std::cout << test.getValue() << std::endl;
-    test.makeBytes();
-    std::cout << test.getValue() << std::endl;
 
 
 
