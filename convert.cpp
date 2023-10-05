@@ -20,7 +20,7 @@ Command-line arguments structure should be:
 const char validDigits[16] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 
 void display(uint64_t num, int base = 0);
-uint64_t convertBase(std::string str, int base);
+uint64_t convertBase(std::string str, unsigned base);
 void printHelp();
 
 int main(int argc, char *argv[]) {
@@ -178,7 +178,7 @@ int main(int argc, char *argv[]) {
     }
 
     uint64_t num = convertBase(numberStr,base);
-    std::cout << "NUM: " << num << std::endl;
+    //std::cout << "NUM: " << num << std::endl;
     display(num,outputBase);
     
 
@@ -220,7 +220,7 @@ void display(uint64_t num, int base){
 }
 
 
-uint64_t convertBase(std::string str, int base){
+uint64_t convertBase(std::string str, unsigned base){
     if(base != 2 && base != 8 && base != 10 && base != 16) {
         std::cout << "Invalid base entered" << std::endl;
         exit(1);
@@ -237,7 +237,7 @@ uint64_t convertBase(std::string str, int base){
     }
     
     for(unsigned i = 0; i < str.size(); ++i){
-        std::cout << i << ": " << str[i];
+        //std::cout << i << ": " << str[i];
         charVal = -1;
         for(unsigned j = 0; j < base; ++j){
             if(std::tolower(validDigits[j]) == std::tolower(str[i])){
@@ -245,7 +245,7 @@ uint64_t convertBase(std::string str, int base){
                 break;
             }
         }
-        std::cout << "~" << charVal << std::endl;
+        //std::cout << "~" << charVal << std::endl;
         if(charVal < 0){
             std::cout << "Invalid character detected" << std::endl;
             exit(1);
@@ -254,37 +254,13 @@ uint64_t convertBase(std::string str, int base){
         if(base != 10){
             uint64_t val = std::pow(2,(((str.size()-1)*powerOfTwo)-(powerOfTwo*i))) * charVal;
             value += val;
-            std::cout << std::hex << std::left << std::setw(17) << val << ": " << value << std::endl;
+            //std::cout << std::hex << std::left << std::setw(17) << val << ": " << value << std::endl;
         } else {
             uint64_t val = std::pow(10,((str.size()-1)-i)) * charVal;
             value += val;
-            std::cout << std::hex << std::left << std::setw(17) << val << ": " << value << std::endl;
+            //std::cout << std::hex << std::left << std::setw(17) << val << ": " << value << std::endl;
         }
-
     }
-
-    /*
-    for(int i = str.size()-1; i > 0; --i){
-        charVal = -1;
-        for(int j = 0; j < base; ++j){
-            if(std::tolower(str[i]) == std::tolower(validDigits[j])){
-                charVal = j;
-                std::cout << charVal << std::endl;
-                break;
-                
-            }
-        }
-        
-    */
-    /*
-        raisedValue = ((std::pow(base, (str.size()-i))) + 1E-9);
-        std::cout << std::hex << std::fixed << "16^" << str.size()-i << ": " << raisedValue << " * " << charVal << " = "
-            << charVal * (std::pow(base,str.size()-i)) << " + " << value << " = " << charVal * (std::pow(base,str.size()-i)) + value;
-        value += charVal * (std::pow(base,str.size()-i));
-        std::cout << value <<std::endl;
-        
-    }
-    */
     return value;
 }
 
