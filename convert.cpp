@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <cstdlib>
 #include <string>
 #include <cmath>
@@ -226,23 +227,64 @@ uint64_t convertBase(std::string str, int base){
     }
     uint64_t value = 0;
     int charVal;
-    for(unsigned i = str.size(); i > 0; --i){
+    int powerOfTwo = 0;
+    if(base == 2){
+        powerOfTwo = 1;
+    } else if(base == 8){
+        powerOfTwo = 3;
+    } else if(base == 16){
+        powerOfTwo = 4;
+    }
+    
+    for(unsigned i = 0; i < str.size(); ++i){
+        std::cout << i << ": " << str[i];
         charVal = -1;
-        for(int j = 0; j < base; ++j){
-            if(std::tolower(str[i-1]) == std::tolower(validDigits[j])){
+        for(unsigned j = 0; j < base; ++j){
+            if(std::tolower(validDigits[j]) == std::tolower(str[i])){
                 charVal = j;
                 break;
             }
         }
+        std::cout << "~" << charVal << std::endl;
         if(charVal < 0){
             std::cout << "Invalid character detected" << std::endl;
             exit(1);
         }
-        uint64_t raisedValue = ((std::pow(base,str.size()-i)) + 1E-9);
-        std::cout << std::hex << std::fixed << "16^" << str.size()-i << ": " << charVal << " * " << raisedValue << ": ";
+        
+        if(base != 10){
+            uint64_t val = std::pow(2,(((str.size()-1)*powerOfTwo)-(powerOfTwo*i))) * charVal;
+            value += val;
+            std::cout << std::hex << std::left << std::setw(17) << val << ": " << value << std::endl;
+        } else {
+            uint64_t val = std::pow(10,((str.size()-1)-i)) * charVal;
+            value += val;
+            std::cout << std::hex << std::left << std::setw(17) << val << ": " << value << std::endl;
+        }
+
+    }
+
+    /*
+    for(int i = str.size()-1; i > 0; --i){
+        charVal = -1;
+        for(int j = 0; j < base; ++j){
+            if(std::tolower(str[i]) == std::tolower(validDigits[j])){
+                charVal = j;
+                std::cout << charVal << std::endl;
+                break;
+                
+            }
+        }
+        
+    */
+    /*
+        raisedValue = ((std::pow(base, (str.size()-i))) + 1E-9);
+        std::cout << std::hex << std::fixed << "16^" << str.size()-i << ": " << raisedValue << " * " << charVal << " = "
+            << charVal * (std::pow(base,str.size()-i)) << " + " << value << " = " << charVal * (std::pow(base,str.size()-i)) + value;
         value += charVal * (std::pow(base,str.size()-i));
         std::cout << value <<std::endl;
+        
     }
+    */
     return value;
 }
 
