@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Hexadecimal.h"
+#include "./classes/Hexadecimal.h"
 //#include <fstream>
 #include <ctime>
 #include <random>
