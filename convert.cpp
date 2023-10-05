@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <string>
 #include <cmath>
+#include <limits>
 
 
 /*
@@ -176,6 +177,7 @@ int main(int argc, char *argv[]) {
     }
 
     uint64_t num = convertBase(numberStr,base);
+    std::cout << "NUM: " << num << std::endl;
     display(num,outputBase);
     
 
@@ -198,18 +200,14 @@ void display(uint64_t num, int base){
     }
     if(base == 2 || base == 0){
         // Gets the binary representation of the number
-        unsigned counter = 0;
         std::string binary = "";
-        if(num == 0){
-            binary = "0";
-        }
         while(num>0){
-            if(counter > 0){
-                binary = std::to_string((num >>= 1) & 1) + binary;
+            if(num&1){
+                binary = '1' + binary;
             } else {
-                binary = std::to_string(num & 1) + binary;
+                binary = '0' + binary;
             }
-            ++counter;
+            num >>= 1;
         }
         while(binary.size() > 1 && binary[0] == '0'){
             binary.assign(binary,1);
@@ -240,7 +238,10 @@ uint64_t convertBase(std::string str, int base){
             std::cout << "Invalid character detected" << std::endl;
             exit(1);
         }
+        uint64_t raisedValue = ((std::pow(base,str.size()-i)) + 1E-9);
+        std::cout << std::hex << std::fixed << "16^" << str.size()-i << ": " << charVal << " * " << raisedValue << ": ";
         value += charVal * (std::pow(base,str.size()-i));
+        std::cout << value <<std::endl;
     }
     return value;
 }
