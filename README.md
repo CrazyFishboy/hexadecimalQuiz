@@ -1,6 +1,6 @@
 # hexadecimalQuiz
 
-*** Incomplete ***
+*** README Incomplete ***
 
 
 Repo has two different programs. The initial purpose was to create a quiz that would present a number in hexadecimal and prompts the user to enter the value in decimal.
